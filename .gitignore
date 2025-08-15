@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+
+# build packages
+dist/
+
+# misc
+*.log
+npm-debug.log
+.DS_Store
+
+# env files
+*.env
+*.env.*
+    
+#logs
+logs/
+account-*.*
+console-output-*.*
+
+# testing
+coverage/
+.nyc_output/
+*.lcov

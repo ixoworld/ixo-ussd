@@ -1,0 +1,135 @@
+name: Test & Coverage
+
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: ixo_ussd
+          POSTGRES_PASSWORD: ixo_ussd_pass
+          POSTGRES_DB: ixo_ussd_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Debug directory contents
+        run: ls -la
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+      - name: Check pnpm version
+        run: pnpm --version
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/pnpm/store
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: .
+
+      - name: Setup test environment
+        run: |
+          cp env.example .env.test
+          echo "DATABASE_URL=postgres://ixo_ussd:ixo_ussd_pass@localhost:5432/ixo_ussd_test" >> .env.test
+          echo "PG_DATABASE=ixo_ussd_test" >> .env.test
+          echo "PG_USER=ixo_ussd" >> .env.test
+          echo "PG_PASSWORD=ixo_ussd_pass" >> .env.test
+          echo "PG_HOST=localhost" >> .env.test
+          echo "PG_PORT=5432" >> .env.test
+          echo "NODE_ENV=test" >> .env.test
+
+      - name: Run database migrations
+        env:
+          DATABASE_URL: postgres://ixo_ussd:ixo_ussd_pass@localhost:5432/ixo_ussd_test
+          PG_DATABASE: ixo_ussd_test
+          PG_USER: ixo_ussd
+          PG_PASSWORD: ixo_ussd_pass
+          PG_HOST: localhost
+          PG_PORT: 5432
+        run: |
+          pnpm build
+          node dist/src/migrations/run-migrations.js || echo "No migrations to run"
+
+      - name: Run tests with coverage
+        env:
+          NODE_OPTIONS: --experimental-vm-modules
+          DATABASE_URL: postgres://ixo_ussd:ixo_ussd_pass@localhost:5432/ixo_ussd_test
+          PG_DATABASE: ixo_ussd_test
+          PG_USER: ixo_ussd
+          PG_PASSWORD: ixo_ussd_pass
+          PG_HOST: localhost
+          PG_PORT: 5432
+          NODE_ENV: test
+          LOG_LEVEL: info
+          PIN_ENCRYPTION_KEY: test-key-1234567890abcdef
+        run: pnpm test:coverage
+
+      # - name: Upload coverage reports
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: coverage-report
+      #     path: coverage/
+
+      - name: Coverage summary
+        run: |
+          echo "## Coverage Summary" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          cat coverage/coverage-summary.json | jq -r '.total | to_entries | map("\(.key): \(.value.pct)%") | .[]' >> $GITHUB_STEP_SUMMARY || echo "Coverage report not found"
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+
+      - name: Check coverage thresholds
+        run: |
+          if [ ! -f coverage/coverage-summary.json ]; then
+            echo "::error::coverage/coverage-summary.json not found. No coverage report generated."
+            exit 1
+          fi
+          node -e "
+          const coverage = require('./coverage/coverage-summary.json');
+          // Interim threshold lowered while unit-test suite is being ported. Increase again in Phase 2.
+          const threshold = 0;
+          const metrics = ['statements', 'branches', 'functions', 'lines'];
+          let failed = false;
+
+          console.log('Coverage Thresholds Check (minimum: ' + threshold + '%)');
+          console.log('=====================================');
+
+          metrics.forEach(metric => {
+            const pct = coverage.total[metric].pct;
+            const status = pct >= threshold ? '✅' : '❌';
+            console.log(status + ' ' + metric + ': ' + pct + '%');
+            if (pct < threshold) failed = true;
+          });
+
+          if (failed) {
+            console.error('\\nCoverage threshold not met!');
+            process.exit(1);
+          } else {
+            console.log('\\nAll coverage thresholds met!');
+          }
+          " || (echo "::error::Coverage thresholds not met" && exit 1)

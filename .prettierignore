@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# Environment files
+.env
+.env.*
+
+# Database files
+*.db
+*.sqlite
+
+# Generated files
+*.d.ts
+
+# Logs
+*.log
+logs/
+
+# Documentation that shouldn't be formatted
+CHANGELOG.md
+
+# Config files that have specific formatting
+docker-compose.yml
+*.json 
