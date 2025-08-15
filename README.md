@@ -18,7 +18,7 @@ Run it vanilla. Fork it. Build your own USSD-powered impact solutions.
 
 Built as part of the **IXO World** ecosystem, it enables communities anywhere to interact with the global impact economy through simple, reliable USSD menus. Whether you’re connecting rural stewards, enabling on-chain verifications, or piloting local reward systems, `ixo-ussd` gives you the infrastructure to make it happen — **securely, inclusively, and at scale**.
 
-The IXO USSD gateeway makes it possible for anyone to access blockchain-powered tools on any GSM mobile phone — no smartphone or data plan required.
+The IXO USSD gateway makes it possible for anyone to access blockchain-powered tools on any GSM mobile phone — no smartphone or data plan required.
 
 It’s built to be adaptable: fork this repo, start with the vanilla setup, and quickly customise it to your community, use cases, or technology stack.
 
