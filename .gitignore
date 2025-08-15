@@ -3,16 +3,18 @@ node_modules/
 
 # build packages
 dist/
+build/
 
 # misc
 *.log
 npm-debug.log
 .DS_Store
+.vscode/
 
 # env files
 *.env
 *.env.*
-    
+
 #logs
 logs/
 account-*.*

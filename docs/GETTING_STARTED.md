@@ -206,8 +206,8 @@ Yes, but use Redis for session storage and proper monitoring at scale.
 
 ## 📚 Documentation Guide
 
-**Quick Start:** [README.md](../README.md) - Essential steps to get running
-**Complete Setup:** This guide - Detailed setup and configuration
-**API Reference:** [API.md](API.md) - Endpoints and integration examples
-**Architecture:** [ARCHITECTURE_PATTERNS_GUIDE.md](ARCHITECTURE_PATTERNS_GUIDE.md) - State machine patterns
-**Development:** [STATE_MACHINE_PATTERNS.md](STATE_MACHINE_PATTERNS.md) - Creating custom machines
+- **Quick Start:** [README.md](../README.md) - Essential steps to get running  
+- **Complete Setup:** This guide - Detailed setup and configuration  
+- **API Reference:** [API.md](API.md) - Endpoints and integration examples  
+- **Architecture:** [ARCHITECTURE_PATTERNS_GUIDE.md](ARCHITECTURE_PATTERNS_GUIDE.md) - State machine patterns  
+- **Development:** [STATE_MACHINE_PATTERNS.md](STATE_MACHINE_PATTERNS.md) - Creating custom machines  
