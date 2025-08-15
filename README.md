@@ -4,9 +4,7 @@
 
 [![Build](https://img.shields.io/github/actions/workflow/status/ixoworld/ixo-ussd/.github/workflows/test-coverage.yml?branch=main)](.github/workflows/test-coverage.yml)  
 [![Version](https://img.shields.io/github/v/release/ixoworld/ixo-ussd)](https://img.shields.io/github/v/release/ixoworld/ixo-ussd)  
-[![License](https://img.shields.io/badge/license-Apache-blue.svg)](./LICENSE)  
-[![Contributors](https://img.shields.io/github/contributors/ixoworld/ixo-ussd)](https://github.com/ixoworld/ixo-ussd/graphs/contributors)  
-[![Docs](https://img.shields.io/badge/docs-online-brightgreen)](https://docs.ixo.world)
+[![License](https://img.shields.io/badge/license-Apache-blue.svg)](./LICENSE) [![Contributors](https://img.shields.io/github/contributors/ixoworld/ixo-ussd)](https://github.com/ixoworld/ixo-ussd/graphs/contributors) [![Docs](https://img.shields.io/badge/docs-online-brightgreen)](https://docs.ixo.world)
 
 ![Social Preview / Banner Image](docs/banner.jpg)
 
