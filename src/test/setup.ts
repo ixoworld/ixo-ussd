@@ -34,7 +34,6 @@ console.log(environmentSetup.getEnvironmentSummary());
 const defaultTestValues = {
   CHAIN_NETWORK: "testnet",
   MATRIX_HOME_SERVER: "https://test.matrix.org",
-  MATRIX_REGISTRATION_TOKEN: "test_token",
   MATRIX_BOT_URL: "https://test.bot.matrix.org",
   FEEGRANT_URL: "https://test.feegrant.com",
   FEEGRANT_AUTH: "test_auth_token",
@@ -52,7 +51,6 @@ for (const [envVar, defaultValue] of Object.entries(defaultTestValues)) {
 const requiredEnvVars = [
   "CHAIN_NETWORK",
   "MATRIX_HOME_SERVER",
-  "MATRIX_REGISTRATION_TOKEN",
   "MATRIX_BOT_URL",
   "FEEGRANT_URL",
   "FEEGRANT_AUTH",
