@@ -234,7 +234,7 @@ export async function startServer(): Promise<void> {
       startupInfo.push(
         `🔍 Debug endpoint: ${address}/api/ussd/debug/:sessionId`,
         `📊 Sessions endpoint: ${address}/api/ussd/sessions`,
-        `🔧 USSD Machine Type: ${process.env.USSD_MACHINE_TYPE || "example"}`,
+        `🔧 USSD Machine Type: ${process.env.USSD_MACHINE_TYPE || "supamoto"}`,
         "",
         "Ready for development! 🎯"
       );

@@ -211,7 +211,7 @@ export const config = {
     botUrl: process.env.MATRIX_BOT_URL,
     stateBotUrl: process.env.MATRIX_STATE_BOT_URL,
   },
-  USSD_MACHINE_TYPE: process.env.USSD_MACHINE_TYPE || "example",
+  USSD_MACHINE_TYPE: process.env.USSD_MACHINE_TYPE || "supamoto",
 } as const;
 
 // Type for the config object

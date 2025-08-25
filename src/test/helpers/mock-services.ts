@@ -462,7 +462,7 @@ export class MockUssdHandler {
       case "1":
         session.state = "know_more";
         await this.dbService.setSession(sessionId, session);
-        return "CON Know More\n1. About Example\n2. How it works\n3. Contact us\n0. Back";
+        return "CON Know More\n1. About Supamoto\n2. How it works\n3. Contact us\n0. Back";
 
       case "2":
         session.state = "purchase";
@@ -491,11 +491,11 @@ export class MockUssdHandler {
   ): Promise<string> {
     switch (input) {
       case "1":
-        return "END Example provides solar energy solutions for rural communities.";
+        return "END Supamoto provides solar energy solutions for rural communities.";
       case "2":
         return "END Our system uses blockchain technology to enable transparent energy trading.";
       case "3":
-        return "END Contact us at support@example.com or call +123456789.";
+        return "END Contact us at support@supamoto.com or call +123456789.";
       case "0":
         session.state = "welcome";
         await this.dbService.setSession(sessionId, session);

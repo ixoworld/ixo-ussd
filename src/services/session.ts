@@ -8,7 +8,7 @@
  */
 
 import { createActor, type Actor } from "xstate";
-import { exampleMachine } from "../machines/example/parentMachine.js";
+import { supamotoMachine } from "../machines/supamoto/parentMachine.js";
 import { createModuleLogger } from "./logger.js";
 import { dataService } from "./database-storage.js";
 import { ussdInputService } from "./ussd-input.js";
@@ -87,7 +87,7 @@ export class SessionService {
         await this.handlePhoneRecord(phoneNumber);
 
         // Configure machine with environment-appropriate actors
-        const configuredMachine = exampleMachine.provide({
+        const configuredMachine = supamotoMachine.provide({
           actors,
         });
 

@@ -13,7 +13,7 @@ import { knowMoreMachine } from "./information/index.js";
 import { withNavigation } from "./utils/navigation-mixin.js";
 
 /**
- * Example State Machine - Simplified Architecture
+ * Supamoto State Machine - Simplified Architecture
  *
  * Main orchestrator machine that implements the core USSD menu flows.
  *
@@ -27,7 +27,7 @@ import { withNavigation } from "./utils/navigation-mixin.js";
  * - Know More → Information flows (SMS responses)
  */
 
-export interface ExampleMachineContext {
+export interface SupamotoMachineContext {
   sessionId: string;
   phoneNumber: string;
   serviceCode: string;
@@ -41,7 +41,7 @@ export interface ExampleMachineContext {
   message: string;
 }
 
-export type ExampleMachineEvent =
+export type SupamotoMachineEvent =
   | { type: "DIAL_USSD"; phoneNumber: string; serviceCode: string }
   | { type: "INPUT"; input: string } // User input from USSD
   | { type: "CHILD_MACHINE_DONE"; output: any }
@@ -51,10 +51,10 @@ export type ExampleMachineEvent =
 
 import { messages } from "../../constants/branding.js";
 const preMenuMessage = `${messages.welcome()}\n1. Know More\n2. Account Menu\n*. Exit`;
-export const exampleMachine = setup({
+export const supamotoMachine = setup({
   types: {
-    context: {} as ExampleMachineContext,
-    events: {} as ExampleMachineEvent,
+    context: {} as SupamotoMachineContext,
+    events: {} as SupamotoMachineEvent,
     input: {} as {
       sessionId?: string;
       phoneNumber?: string;
@@ -179,10 +179,10 @@ export const exampleMachine = setup({
       event.type === "INPUT" && event.input.trim().length >= 6,
   },
 }).createMachine({
-  id: "exampleMachine",
+  id: "supamotoMachine",
   initial: "idle",
 
-  context: ({ input }): ExampleMachineContext => ({
+  context: ({ input }): SupamotoMachineContext => ({
     sessionId: input?.sessionId || "",
     phoneNumber: input?.phoneNumber || "",
     serviceCode: input?.serviceCode || "",
@@ -527,4 +527,4 @@ export const exampleMachine = setup({
   },
 });
 
-export type ExampleMachine = typeof exampleMachine;
+export type SupamotoMachine = typeof supamotoMachine;

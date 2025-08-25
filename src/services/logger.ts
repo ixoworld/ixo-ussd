@@ -69,7 +69,7 @@ export const createChildLogger = (context: Record<string, any>) => {
 
 /**
  * Create a logger for a specific service/module
- * @param module - Module name (e.g., 'auth', 'example', 'session')
+ * @param module - Module name (e.g., 'auth', 'supamoto', 'session')
  * @returns Child logger with module context
  */
 export const createModuleLogger = (module: string) => {

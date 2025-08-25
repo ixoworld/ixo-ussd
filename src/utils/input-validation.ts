@@ -491,7 +491,7 @@ export class BusinessValidator {
     const now = new Date();
     const hour = now.getHours();
 
-    // Example: Maintenance window between 2-4 AM
+    // Supamoto: Maintenance window between 2-4 AM
     if (hour >= 2 && hour < 4) {
       return {
         isValid: false,

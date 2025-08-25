@@ -219,7 +219,7 @@ export interface AppTypesContext {
   ixo: IxoContextData;
 
   // App-specific data
-  example: AppContextData;
+  supamoto: AppContextData;
 
   // Shared/temporary data
   temp: TempContextData;
@@ -366,7 +366,7 @@ type WithBase<T extends { type: string }> = T & BaseEvent;
 /**
  * Union of all possible events
  */
-export type ExampleWalletEvent =
+export type SupamotoWalletEvent =
   | WithBase<InputEvent>
   | WithBase<UpdateEvent>
   // IXO-specific events
@@ -391,7 +391,7 @@ export type ExampleWalletEvent =
 /**
  * State Machine Input - data passed when creating the machine actor
  */
-export interface ExampleWalletInput {
+export interface SupamotoWalletInput {
   phoneNumber: string;
   sessionId?: string;
   serviceCode?: string;
@@ -402,10 +402,10 @@ export interface ExampleWalletInput {
  * Guard Function Types
  */
 export type ContextGuard = (context: AppTypesContext) => boolean;
-export type EventGuard = (event: ExampleWalletEvent) => boolean;
+export type EventGuard = (event: SupamotoWalletEvent) => boolean;
 export type CombinedGuard = (
   context: AppTypesContext,
-  event: ExampleWalletEvent
+  event: SupamotoWalletEvent
 ) => boolean;
 
 /**
@@ -436,7 +436,7 @@ export type ContextUpdate = Partial<{
   message: string;
   userState: Partial<UserState>;
   ixo: Partial<IxoContextData>;
-  example: Partial<AppContextData>;
+  supamoto: Partial<AppContextData>;
   temp: Partial<TempContextData>;
 }>;
 
@@ -454,7 +454,7 @@ export type { AuthResponse };
  * Provides safe defaults for all context fields
  */
 export function createInitialContext(
-  input: ExampleWalletInput
+  input: SupamotoWalletInput
 ): AppTypesContext {
   return {
     // Session metadata
@@ -464,7 +464,7 @@ export function createInitialContext(
     phoneNumber: input.phoneNumber,
     serviceCode: input.serviceCode || "*483*7#",
     language: input.language || "eng",
-    message: "Welcome to USSD Example App...",
+    message: "Welcome to USSD Supamoto App...",
 
     // User state tracking
     userState: {
@@ -496,7 +496,7 @@ export function createInitialContext(
     },
 
     // App-specific data
-    example: {
+    supamoto: {
       user: undefined,
       agentId: undefined,
       agentPin: undefined,
@@ -569,9 +569,9 @@ export function mergeContextUpdate(
     ixo: update.ixo
       ? { ...currentContext.ixo, ...update.ixo }
       : currentContext.ixo,
-    example: update.example
-      ? { ...currentContext.example, ...update.example }
-      : currentContext.example,
+    supamoto: update.supamoto
+      ? { ...currentContext.supamoto, ...update.supamoto }
+      : currentContext.supamoto,
     temp: update.temp
       ? { ...currentContext.temp, ...update.temp }
       : currentContext.temp,
@@ -621,8 +621,8 @@ export function validateContext(context: AppTypesContext): {
   if (!context.ixo) {
     errors.push("Missing ixo context");
   }
-  if (!context.example) {
-    errors.push("Missing example context");
+  if (!context.supamoto) {
+    errors.push("Missing supamoto context");
   }
   if (!context.temp) {
     errors.push("Missing temp context");
@@ -639,7 +639,7 @@ export function validateContext(context: AppTypesContext): {
  */
 export function resetContextSection(
   context: AppTypesContext,
-  section: keyof Pick<AppTypesContext, "ixo" | "example" | "temp">
+  section: keyof Pick<AppTypesContext, "ixo" | "supamoto" | "temp">
 ): AppTypesContext {
   const defaults = createInitialContext({
     phoneNumber: context.phoneNumber,

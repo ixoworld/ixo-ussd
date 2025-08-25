@@ -1,8 +1,8 @@
 /**
- * Composite Guards for Example Machine
+ * Composite Guards for Supamoto Wallet Machine
  *
  * This module contains guards that combine multiple domains or complex business logic.
- * These guards provide high-level checks that span across IXO, Example, and system concerns.
+ * These guards provide high-level checks that span across IXO, Supamoto, and system concerns.
  */
 
 import { createModuleLogger } from "../../../services/logger.js";
@@ -25,7 +25,7 @@ export const canAccessIxoFeatures: CombinedGuard = (context, event) => {
 };
 
 /**
- * Checks if user can access any wallet features (either IXO or Example)
+ * Checks if user can access any wallet features (either IXO or Supamoto)
  */
 export const canAccessWalletFeatures: CombinedGuard = (context, event) => {
   return anyGuard(canAccessIxoFeatures)(context, event);
@@ -58,9 +58,9 @@ export const canPerformIxoTransactions: CombinedGuard = (context, event) => {
 };
 
 /**
- * Checks if user can perform Example transactions specifically
+ * Checks if user can perform Supamoto transactions specifically
  */
-export const canPerformExampleTransactions: CombinedGuard = (
+export const canPerformSupamotoTransactions: CombinedGuard = (
   context,
   event
 ) => {
@@ -140,9 +140,9 @@ export const canPerformAdminOperations: CombinedGuard = (context, event) => {
   );
 
   // TODO: Add proper admin role checking here
-  // Example: context.userState.role === 'admin' || context.ixo.user?.role === 'admin'
+  // Supamoto: context.userState.role === 'admin' || context.ixo.user?.role === 'admin'
   // TODO: Add additional admin credential verification
-  // Example: context.userState.adminVerified === true
+  // Supamoto: context.userState.adminVerified === true
 
   const canAccess = allGuards(
     notGuard(isRateLimited),
@@ -180,9 +180,9 @@ export const canEnterIxoFlow: CombinedGuard = (context, event) => {
 };
 
 /**
- * Checks if user can enter Example flow
+ * Checks if user can enter Supamoto flow
  */
-export const canEnterExampleFlow: CombinedGuard = (context, event) => {
+export const canEnterSupamotoFlow: CombinedGuard = (context, event) => {
   return allGuards(canPerformBasicOperations, canAccessIxoFeatures)(
     context,
     event
@@ -249,7 +249,7 @@ export const compositeGuards = {
   canAccessWalletFeatures,
   canPerformTransactions,
   canPerformIxoTransactions,
-  canPerformExampleTransactions,
+  canPerformSupamotoTransactions,
   canCreateAccounts,
   canModifyAccountSettings,
   canViewAccountInfo,
@@ -257,7 +257,7 @@ export const compositeGuards = {
   canPerformAdvancedOperations,
   canPerformAdminOperations,
   canEnterIxoFlow,
-  canEnterExampleFlow,
+  canEnterSupamotoFlow,
   canSwitchFlows,
   requiresElevatedSecurity,
   hasMetSecurityRequirements,

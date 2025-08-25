@@ -1,5 +1,5 @@
 /**
- * Validation Guards for Example Wallet Machine
+ * Validation Guards for Supamoto Wallet Machine
  *
  * This module contains guards related to input validation.
  * These guards validate user input using the input validation utilities.
@@ -10,8 +10,8 @@ import { validateUserInput } from "../../../utils/input-validation.js";
 import { isInputOneOf } from "./navigation.guards.js";
 import type {
   CombinedGuard,
-  AppTypesContext as ExampleWalletContext,
-  ExampleWalletEvent,
+  AppTypesContext as SupamotoWalletContext,
+  SupamotoWalletEvent,
 } from "../types.js";
 
 const logger = createModuleLogger("validation-guards");
@@ -99,8 +99,8 @@ export function createValidationGuard(
   options: ValidationOptionsMap[keyof ValidationOptionsMap] = {}
 ): CombinedGuard {
   return (
-    context: ExampleWalletContext,
-    event: ExampleWalletEvent
+    context: SupamotoWalletContext,
+    event: SupamotoWalletEvent
   ): boolean => {
     if (event.type !== "INPUT") return false;
 

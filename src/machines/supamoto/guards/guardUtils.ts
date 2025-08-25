@@ -1,5 +1,5 @@
 /**
- * Guard Utilities for Example Wallet Machine
+ * Guard Utilities for Supamoto Wallet Machine
  *
  * This module contains utility functions for combining and manipulating guards.
  * These utilities help create complex guard logic from simpler components.

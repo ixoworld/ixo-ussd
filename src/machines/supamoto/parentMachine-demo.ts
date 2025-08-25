@@ -8,7 +8,7 @@
  * - Delegating to child machines (Know More, Account Menu)
  * - Handling login and account creation returns
  *
- * Run with: pnpm tsx src/machines/example/parentMachine-demo.ts
+ * Run with: pnpm tsx src/machines/supamoto/parentMachine-demo.ts
  */
 
 import { createActor } from "xstate";

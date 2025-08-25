@@ -35,7 +35,7 @@ const createMockUSSDHandler = (): USSDHandler => {
       return `CON ${brandingMessages.welcome}\n1. Know More\n2. Purchase\n3. Top Up Balance\n4. Report Fault`;
     }
     if (input === "1") {
-      return "CON Know More\n1. About Example\n2. How it works\n3. Contact us\n0. Back";
+      return "CON Know More\n1. About Supamoto\n2. How it works\n3. Contact us\n0. Back";
     }
     if (input === "2") {
       return "CON Purchase\n1. Solar Panel\n2. Battery\n3. Inverter\n0. Back";

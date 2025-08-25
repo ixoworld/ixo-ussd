@@ -1,8 +1,8 @@
 // Centralized branding constants for generic, reusable project text
 // Replace values here to customize the app's displayed name without changing code across machines
 
-export const APP_NAME = "USSD Example App" as const;
-export const ORG_NAME = "Example Org" as const;
+export const APP_NAME = "USSD Supamoto App" as const;
+export const ORG_NAME = "Su Org" as const;
 
 // Convenience helpers for composing generic messages
 export const messages = {

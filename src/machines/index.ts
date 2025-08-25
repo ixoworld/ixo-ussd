@@ -1,23 +1,23 @@
 // Main orchestrator machine
-import { exampleMachine } from "./example/parentMachine.js";
+import { supamotoMachine } from "./supamoto/parentMachine.js";
 
 // Information machines
-import { knowMoreMachine } from "./example/information/knowMoreMachine.js";
+import { knowMoreMachine } from "./supamoto/information/knowMoreMachine.js";
 
 // Account management machines
-import { accountMenuMachine } from "./example/account-menu/accountMenuMachine.js";
-import { loginMachine } from "./example/account-login/loginMachine.js";
-import { accountCreationMachine } from "./example/account-creation/accountCreationMachine.js";
+import { accountMenuMachine } from "./supamoto/account-menu/accountMenuMachine.js";
+import { loginMachine } from "./supamoto/account-login/loginMachine.js";
+import { accountCreationMachine } from "./supamoto/account-creation/accountCreationMachine.js";
 
-export type StateMachine = typeof exampleMachine;
+export type StateMachine = typeof supamotoMachine;
 
 export function getStateMachine(): StateMachine {
-  return exampleMachine;
+  return supamotoMachine;
 }
 
 // Export available machines
 export {
-  exampleMachine,
+  supamotoMachine,
   knowMoreMachine,
   accountMenuMachine,
   loginMachine,

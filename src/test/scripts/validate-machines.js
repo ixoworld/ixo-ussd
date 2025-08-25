@@ -15,7 +15,7 @@ import { execSync } from "child_process";
 import { readFileSync, existsSync, readdirSync } from "fs";
 import path from "path";
 
-const MACHINES_DIR = "src/machines/example";
+const MACHINES_DIR = "src/machines/supamoto";
 const DOMAIN_DIRS = [
   "information",
   "account-menu",
@@ -197,7 +197,7 @@ if (hasErrors) {
   );
   console.log("  - Demo Files Guide: docs/development/DEMO_FILES_GUIDE.md");
   console.log("  - Machine README: src/machines/README.md");
-  console.log("  - Template: src/machines/example/MACHINE_TEMPLATE.ts");
+  console.log("  - Template: src/machines/supamoto/MACHINE_TEMPLATE.ts");
   process.exit(1);
 } else {
   console.log(

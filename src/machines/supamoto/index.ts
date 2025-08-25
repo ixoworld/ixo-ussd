@@ -1,7 +1,7 @@
 /**
- * Example Machine Module - Simplified Architecture
+ * Supamoto Machine Module - Simplified Architecture
  *
- * Main entry point for the generic Example state machine and related components.
+ * Main entry point for the generic Supamoto state machine and related components.
  * Currently supports core functionality with placeholders for future development.
  *
  * Available Modules:
@@ -12,11 +12,11 @@
  */
 
 // Main orchestrator machine - simplified architecture
-export { exampleMachine } from "./parentMachine.js";
+export { supamotoMachine } from "./parentMachine.js";
 export type {
-  ExampleMachine,
-  ExampleMachineContext,
-  ExampleMachineEvent,
+  SupamotoMachine,
+  SupamotoMachineContext,
+  SupamotoMachineEvent,
 } from "./parentMachine.js";
 
 export { knowMoreMachine } from "./information/index.js";

@@ -102,5 +102,5 @@ console.log("   • ✅ Type Safety: Full TypeScript support with XState v5");
 console.log("\n🔄 Next Steps:");
 console.log("   • Test login machine independently");
 console.log("   • Test account creation machine independently");
-console.log("   • Integrate with main example wallet machine");
+console.log("   • Integrate with main supamoto wallet machine");
 console.log("   • Add IXO account creation to account creation flow");

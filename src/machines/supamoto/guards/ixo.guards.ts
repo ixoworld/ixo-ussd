@@ -1,5 +1,5 @@
 /**
- * IXO Guards for Example Wallet Machine
+ * IXO Guards for Supamoto Wallet Machine
  *
  * This module contains guards related to IXO-specific business logic.
  * These guards handle IXO account management, transactions, and authentication.

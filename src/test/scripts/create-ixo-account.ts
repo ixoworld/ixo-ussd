@@ -31,7 +31,7 @@ if (fs.existsSync(envPath)) {
 }
 
 // Get user input from command line arguments or use defaults
-const userId = process.argv[2] || `user-${Date.now()}@example.com`;
+const userId = process.argv[2] || `user-${Date.now()}@supamoto.com`;
 const pin = process.argv[3] || "1234";
 
 // Display configuration in use

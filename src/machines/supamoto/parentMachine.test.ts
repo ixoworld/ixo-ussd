@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { createActor } from "xstate";
-import { exampleMachine } from "./parentMachine.js";
+import { supamotoMachine } from "./parentMachine.js";
 
-describe("exampleMachine - Smoke Tests", () => {
+describe("supamotoMachine - Smoke Tests", () => {
   const mockInput = {
     sessionId: "test-session-123",
     phoneNumber: "+260987654321",
@@ -13,7 +13,7 @@ describe("exampleMachine - Smoke Tests", () => {
 
   describe("Basic Functionality", () => {
     it("should create and start successfully", () => {
-      const actor = createActor(exampleMachine, { input: mockInput });
+      const actor = createActor(supamotoMachine, { input: mockInput });
       actor.start();
 
       const snapshot = actor.getSnapshot();
@@ -22,7 +22,7 @@ describe("exampleMachine - Smoke Tests", () => {
     });
 
     it("should handle DIAL_USSD event", () => {
-      const actor = createActor(exampleMachine, { input: mockInput });
+      const actor = createActor(supamotoMachine, { input: mockInput });
       actor.start();
 
       actor.send({
@@ -37,7 +37,7 @@ describe("exampleMachine - Smoke Tests", () => {
     });
 
     it("should handle input events", () => {
-      const actor = createActor(exampleMachine, { input: mockInput });
+      const actor = createActor(supamotoMachine, { input: mockInput });
       actor.start();
 
       actor.send({ type: "INPUT", input: "1" });
@@ -47,7 +47,7 @@ describe("exampleMachine - Smoke Tests", () => {
     });
 
     it("should handle session close", () => {
-      const actor = createActor(exampleMachine, { input: mockInput });
+      const actor = createActor(supamotoMachine, { input: mockInput });
       actor.start();
 
       actor.send({ type: "INPUT", input: "0" });

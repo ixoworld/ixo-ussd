@@ -1,5 +1,5 @@
 /**
- * System Guards for Example Wallet Machine
+ * System Guards for Supamoto Wallet Machine
  *
  * This module contains guards related to system-level operations.
  * These guards handle rate limiting, service availability, and session management.

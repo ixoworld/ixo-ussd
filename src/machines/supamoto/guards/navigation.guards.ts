@@ -1,5 +1,5 @@
 /**
- * Navigation Guards for Example Wallet Machine
+ * Navigation Guards for Supamoto Wallet Machine
  *
  * This module contains guards related to navigation and basic input handling.
  * These guards help determine user navigation intent and validate basic input patterns.
@@ -8,8 +8,8 @@
 import { EVENT_INPUTS, EVENT_TYPES } from "../../../constants/navigation.js";
 import type {
   CombinedGuard,
-  AppTypesContext as ExampleWalletContext,
-  ExampleWalletEvent,
+  AppTypesContext as SupamotoWalletContext,
+  SupamotoWalletEvent,
 } from "../types.js";
 
 // =================================================================================================
@@ -21,7 +21,7 @@ import type {
  */
 export const isInput =
   (expectedInput: string): CombinedGuard =>
-  (context: ExampleWalletContext, event: ExampleWalletEvent): boolean => {
+  (context: SupamotoWalletContext, event: SupamotoWalletEvent): boolean => {
     if (event.type !== EVENT_TYPES.INPUT) return false;
     return event.input === expectedInput;
   };
@@ -31,7 +31,7 @@ export const isInput =
  */
 export const isInputOneOf =
   (validInputs: string[]): CombinedGuard =>
-  (context: ExampleWalletContext, event: ExampleWalletEvent): boolean => {
+  (context: SupamotoWalletContext, event: SupamotoWalletEvent): boolean => {
     if (event.type !== EVENT_TYPES.INPUT) return false;
     return validInputs.includes(event.input);
   };
