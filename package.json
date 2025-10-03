@@ -23,7 +23,7 @@
     "lint": "eslint \"src/**/*.{ts,tsx,js,jsx}\" --fix",
     "validate:machines": "node src/test/scripts/validate-machines.js",
     "prepare": "husky install",
-    "view:db-queries": "NODE_ENV=dev NODE_OPTIONS='--loader ts-node/esm' ts-node --require dotenv/config src/test/scripts/db-queries.ts"
+    "view:db-queries": "NODE_OPTIONS='--loader ts-node/esm' ts-node --require dotenv/config src/test/scripts/db-queries.ts"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,js,jsx}": [

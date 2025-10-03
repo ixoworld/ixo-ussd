@@ -1,11 +1,11 @@
 /**
  * Script to query phone and customer data from the database.
  * Usage:
- *   ts-node db-queries.ts <phoneNumber>
- *   ts-node db-queries.ts --customer <customer_id>
- *   ts-node db-queries.ts --profile <ixo_profile_id>
- *   ts-node db-queries.ts --matrix <customer_id>
- *   ts-node db-queries.ts         # (to list all phones)
+ *   pnpm view:db-queries         # (to list all phones)
+ *   pnpm view:db-queries <phoneNumber>
+ *   pnpm view:db-queries --customer <customer_id>
+ *   pnpm view:db-queries --profile <ixo_profile_id>
+ *   pnpm view:db-queries --matrix <customer_id>
  */
 
 import { Pool } from "pg";
@@ -25,10 +25,12 @@ const pool = new Pool({
 
 async function queryPhones(phoneNumber?: string) {
   console.log("Connecting to the database to view users...");
+  console.log("NODE_ENV:", process.env.NODE_ENV);
   console.log("PG_USER:", process.env.PG_USER);
   console.log("PG_HOST:", process.env.PG_HOST);
   console.log("PG_PORT:", process.env.PG_PORT);
   console.log("PG_DATABASE:", process.env.PG_DATABASE);
+  console.log("SSL:", ssl);
   const client = await pool.connect();
   try {
     let query = `
