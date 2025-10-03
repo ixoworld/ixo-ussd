@@ -20,7 +20,6 @@ export interface IxoConfig {
   feegrantServiceUrl: string;
   feegrantGranter: string;
   matrixHomeserverUrl: string;
-  matrixRegistrationToken: string;
   roomBotUrl: string;
 }
 
@@ -50,9 +49,6 @@ export function getIxoConfig(overrides: Partial<IxoConfig> = {}): IxoConfig {
     feegrantGranter: overrides.feegrantGranter || process.env.FEEGRANT_GRANTER,
     matrixHomeserverUrl:
       overrides.matrixHomeserverUrl || process.env.MATRIX_HOME_SERVER,
-    matrixRegistrationToken:
-      overrides.matrixRegistrationToken ||
-      process.env.MATRIX_REGISTRATION_TOKEN,
     roomBotUrl: overrides.roomBotUrl || process.env.MATRIX_BOT_URL,
   };
 

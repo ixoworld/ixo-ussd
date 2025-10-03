@@ -36,12 +36,7 @@ const pin = process.argv[3] || "1234";
 
 // Display configuration in use
 console.log("\nEnvironment Configuration:");
-[
-  "CHAIN_NETWORK",
-  "FEEGRANT_URL",
-  "MATRIX_HOME_SERVER",
-  "MATRIX_REGISTRATION_TOKEN",
-].forEach(key => {
+["CHAIN_NETWORK", "FEEGRANT_URL", "MATRIX_HOME_SERVER"].forEach(key => {
   const value = process.env[key];
   if (value) {
     // Mask sensitive values
@@ -68,7 +63,6 @@ const requiredEnvVars = [
   "FEEGRANT_URL",
   "FEEGRANT_AUTH",
   "MATRIX_HOME_SERVER",
-  "MATRIX_REGISTRATION_TOKEN",
   "MATRIX_BOT_URL",
 ];
 
