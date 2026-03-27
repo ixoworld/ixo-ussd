@@ -89,15 +89,16 @@ export async function createDid(
           )?.granter
         : undefined;
 
-      logger.debug(
-        {
-          address,
-          offlineSigner,
-          chainRpcUrl,
-          feegrantGranter,
-        },
-        "createIidDocumentIfNotExists params"
-      );
+      if (process.env.NODE_ENV !== "production") {
+        logger.debug(
+          {
+            address,
+            chainRpcUrl,
+            feegrantGranter,
+          },
+          "createIidDocumentIfNotExists params"
+        );
+      }
 
       const did = await createIidDocumentIfNotExists({
         address,

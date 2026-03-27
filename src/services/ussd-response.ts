@@ -44,40 +44,66 @@ export class USSDResponseService {
   }
 
   /**
-   * Get message from snapshot, prioritizing active child machines
+   * Get message from snapshot, prioritizing the deepest active child machine.
+   * Recursively traverses the children tree to handle 3+ levels of nesting.
    */
   private getMessageFromSnapshot(snapshot: any): string {
-    // Check if there are active child machines (invoked actors)
-    if (snapshot.children && Object.keys(snapshot.children).length > 0) {
-      // Look for active child machines and use their message if available
-      for (const [childId, childActor] of Object.entries(snapshot.children)) {
-        if (
-          childActor &&
-          typeof childActor === "object" &&
-          "getSnapshot" in childActor
-        ) {
-          try {
-            const childSnapshot = (childActor as any).getSnapshot();
-            if (childSnapshot?.context?.message) {
-              console.log(`📨 Using message from child machine: ${childId}`);
-              return childSnapshot?.context?.message;
-            }
-          } catch (error) {
-            console.warn(
-              `⚠️ Could not get snapshot from child ${childId}:`,
-              error
-            );
-          }
-        }
-      }
+    const deepestMessage = this.findDeepestChildMessage(snapshot);
+    if (deepestMessage) {
+      return deepestMessage;
     }
 
     // Fallback to parent machine message
     const parentMessage = snapshot.context?.message || "Service unavailable";
-    console.log(
-      `📨 Using message from parent machine: ${parentMessage.substring(0, 10)}...`
-    );
+    if (process.env.NODE_ENV !== "production") {
+      console.log(
+        `📨 Using message from parent machine: ${parentMessage.substring(0, 10)}...`
+      );
+    }
     return parentMessage;
+  }
+
+  /**
+   * Recursively find the deepest child machine's message.
+   * Traverses nested children to support deeply nested state machines (3+ levels).
+   */
+  private findDeepestChildMessage(snapshot: any): string | null {
+    if (!snapshot.children || Object.keys(snapshot.children).length === 0) {
+      return null;
+    }
+
+    for (const [childId, childActor] of Object.entries(snapshot.children)) {
+      if (
+        childActor &&
+        typeof childActor === "object" &&
+        "getSnapshot" in childActor
+      ) {
+        try {
+          const childSnapshot = (childActor as any).getSnapshot();
+
+          // Recurse into nested children first (deepest wins)
+          const nestedMessage = this.findDeepestChildMessage(childSnapshot);
+          if (nestedMessage) {
+            return nestedMessage;
+          }
+
+          // If no deeper child has a message, use this child's message
+          if (childSnapshot?.context?.message) {
+            if (process.env.NODE_ENV !== "production") {
+              console.log(`📨 Using message from child machine: ${childId}`);
+            }
+            return childSnapshot.context.message;
+          }
+        } catch (error) {
+          console.warn(
+            `⚠️ Could not get snapshot from child ${childId}:`,
+            error
+          );
+        }
+      }
+    }
+
+    return null;
   }
 
   /**
@@ -133,7 +159,9 @@ export class USSDResponseService {
     if (message.includes("0. Back") || message.includes("*. Exit")) {
       return message;
     }
-    console.log("State:", state);
+    if (process.env.NODE_ENV !== "production") {
+      console.log("State:", state);
+    }
     // States that shouldn't have back option
     const noBackStates = [
       "idle",
@@ -164,28 +192,45 @@ export class USSDResponseService {
   }
 
   /**
-   * Get the active state value, considering child machines first
+   * Get the active state value, considering the deepest child machine first.
+   * Recursively traverses nested children to support 3+ levels.
    */
   private getActiveStateValue(snapshot: any): string {
-    // Try child machine value first
-    if (snapshot.children && Object.keys(snapshot.children).length > 0) {
-      for (const [, childActor] of Object.entries(snapshot.children)) {
-        if (
-          childActor &&
-          typeof childActor === "object" &&
-          "getSnapshot" in childActor
-        ) {
-          try {
-            const childSnapshot = (childActor as any).getSnapshot();
-            if (childSnapshot?.value) {
-              return childSnapshot.value as string;
-            }
-          } catch {}
-        }
+    const deepestValue = this.findDeepestChildStateValue(snapshot);
+    return deepestValue ?? (snapshot.value as string);
+  }
+
+  /**
+   * Recursively find the deepest child machine's state value.
+   */
+  private findDeepestChildStateValue(snapshot: any): string | null {
+    if (!snapshot.children || Object.keys(snapshot.children).length === 0) {
+      return null;
+    }
+
+    for (const [, childActor] of Object.entries(snapshot.children)) {
+      if (
+        childActor &&
+        typeof childActor === "object" &&
+        "getSnapshot" in childActor
+      ) {
+        try {
+          const childSnapshot = (childActor as any).getSnapshot();
+
+          // Recurse into nested children first (deepest wins)
+          const nestedValue = this.findDeepestChildStateValue(childSnapshot);
+          if (nestedValue) {
+            return nestedValue;
+          }
+
+          if (childSnapshot?.value) {
+            return childSnapshot.value as string;
+          }
+        } catch {}
       }
     }
-    // Fallback to parent value
-    return snapshot.value as string;
+
+    return null;
   }
 }
 

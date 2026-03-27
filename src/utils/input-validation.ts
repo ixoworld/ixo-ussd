@@ -253,6 +253,28 @@ export function validatePhoneNumber(input: string): ValidationResult<string> {
 }
 
 /**
+ * Validate NRC (National Registration Card) number
+ * Format: 123456/12/1 (6 digits, slash, 2 digits, slash, 1 digit)
+ */
+export function validateNrc(input: string): ValidationResult<string> {
+  const sanitized = sanitizeInput(input);
+
+  if (!sanitized) {
+    return { isValid: false, error: "NRC number cannot be empty" };
+  }
+
+  if (!/^\d{6}\/\d{2}\/\d$/.test(sanitized)) {
+    return {
+      isValid: false,
+      error:
+        "NRC must be in format 123456/12/1 (6 digits, slash, 2 digits, slash, 1 digit)",
+    };
+  }
+
+  return { isValid: true, value: sanitized, sanitized };
+}
+
+/**
  * Validate Customer ID (C followed by 8+ alphanumeric)
  */
 export function validateCustomerId(input: string): ValidationResult<string> {
@@ -376,6 +398,7 @@ export function validateUserInput(
     | "address"
     | "phone"
     | "wallet"
+    | "nrc"
     | "text"
     | "boolean",
   options: any = {}
@@ -403,6 +426,8 @@ export function validateUserInput(
         return validatePhoneNumber(input);
       case "wallet":
         return validateCustomerId(input);
+      case "nrc":
+        return validateNrc(input);
       case "text":
         return validateTextInput(input, options);
       case "boolean":

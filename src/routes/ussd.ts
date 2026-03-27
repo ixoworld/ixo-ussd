@@ -18,11 +18,13 @@ export async function ussdRoutes(fastify: FastifyInstance) {
         text: string;
       };
 
-      console.log(`\n🔄 USSD Request:`);
-      console.log(`   Session: ${sessionId}`);
-      console.log(`   Phone: ${phoneNumber}`);
-      console.log(`   Service: ${serviceCode}`);
-      console.log(`   Input: "${text}"`);
+      if (process.env.NODE_ENV !== "production") {
+        console.log(`\n🔄 USSD Request:`);
+        console.log(`   Session: ${sessionId}`);
+        console.log(`   Phone: ${phoneNumber}`);
+        console.log(`   Service: ${serviceCode}`);
+        console.log(`   Input: "${text}"`);
+      }
 
       const response = await sessionService.processSession({
         sessionId,
@@ -31,10 +33,10 @@ export async function ussdRoutes(fastify: FastifyInstance) {
         text,
       });
 
-      console.log(`\n📤 USSD Response:`);
-      // console.log(`   Message: ${response.message}`);
-      // console.log(`   Is End: ${response.isEnd}`);
-      console.log(`   Formatted: ${response.formattedResponse}`);
+      if (process.env.NODE_ENV !== "production") {
+        console.log(`\n📤 USSD Response:`);
+        console.log(`   Formatted: ${response.formattedResponse}`);
+      }
 
       // Return the formatted response (CON/END format)
       return reply.type("text/plain").send(response.formattedResponse);

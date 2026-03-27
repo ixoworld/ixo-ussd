@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { validateAmount, validateCustomerId } from "../input-validation.js";
+import {
+  validateAmount,
+  validateCustomerId,
+  validateNrc,
+} from "../input-validation.js";
 
 // Helper functions for tests
 const validatePhoneNumberSimple = (phone: string): boolean => {
@@ -130,6 +134,39 @@ describe("Validation Utilities", () => {
       expect(validateWalletId("c12345678")).toBe(true); // Lowercase C (auto-corrected)
       expect(validateWalletId("CA2345678")).toBe(false); // Letter in number part
       expect(validateWalletId("")).toBe(false); // Empty
+    });
+  });
+
+  describe("NRC Validation", () => {
+    it("should validate correct NRC numbers", () => {
+      const result1 = validateNrc("123456/12/1");
+      expect(result1.isValid).toBe(true);
+      expect(result1.value).toBe("123456/12/1");
+
+      const result2 = validateNrc("000000/00/0");
+      expect(result2.isValid).toBe(true);
+
+      const result3 = validateNrc("999999/99/9");
+      expect(result3.isValid).toBe(true);
+    });
+
+    it("should reject invalid NRC numbers", () => {
+      expect(validateNrc("12345/12/1").isValid).toBe(false); // Too few digits before first slash
+      expect(validateNrc("1234567/12/1").isValid).toBe(false); // Too many digits before first slash
+      expect(validateNrc("123456/1/1").isValid).toBe(false); // Too few digits after first slash
+      expect(validateNrc("123456/123/1").isValid).toBe(false); // Too many digits after first slash
+      expect(validateNrc("123456/12/12").isValid).toBe(false); // Too many digits after second slash
+      expect(validateNrc("123456/12/").isValid).toBe(false); // Missing last digit
+      expect(validateNrc("123456121").isValid).toBe(false); // No slashes
+      expect(validateNrc("abcdef/12/1").isValid).toBe(false); // Letters instead of digits
+      expect(validateNrc("").isValid).toBe(false); // Empty
+      expect(validateNrc("   ").isValid).toBe(false); // Whitespace only
+    });
+
+    it("should handle whitespace in NRC input", () => {
+      const result = validateNrc("  123456/12/1  ");
+      expect(result.isValid).toBe(true);
+      expect(result.value).toBe("123456/12/1");
     });
   });
 

@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { environmentSetup } from "./environment-setup.js";
-import { messages as brandingMessages } from "../../constants/branding.js";
+import { messages as brandingMessages } from "../../src/constants/branding.js";
 
 // Mock data interfaces
 export interface MockUser {
@@ -48,7 +48,7 @@ export class MockDatabaseService {
 
   constructor(dataPath?: string) {
     this.dataPath =
-      dataPath || path.join(process.cwd(), "src/test/fixtures/mock-data");
+      dataPath || path.join(process.cwd(), "tests/fixtures/mock-data");
     this.mockData = this.loadMockData();
   }
 

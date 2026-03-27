@@ -4,9 +4,9 @@
  * Provides test-specific database connection management to prevent
  * "Called end on pool more than once" errors during E2E test teardown.
  */
-import { databaseManager } from "../../services/database-manager.js";
-import { createModuleLogger } from "../../services/logger.js";
-import { ENV, config } from "../../config.js";
+import { databaseManager } from "../../src/services/database-manager.js";
+import { createModuleLogger } from "../../src/services/logger.js";
+import { ENV, config } from "../../src/config.js";
 
 const logger = createModuleLogger("database-test-helper");
 
