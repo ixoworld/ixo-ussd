@@ -16,7 +16,6 @@
     "test:data": "NODE_OPTIONS='--loader ts-node/esm' ts-node --require dotenv/config tests/scripts/test-data.ts",
     "test:database-integration": "NODE_OPTIONS='--loader ts-node/esm' ts-node --require dotenv/config tests/scripts/test-database-integration.ts",
     "test:customer-id": "NODE_OPTIONS='--loader ts-node/esm' ts-node --require dotenv/config tests/scripts/test-customer-id.ts",
-    "test:original-core": "NODE_OPTIONS='--loader ts-node/esm' ts-node --require dotenv/config tests/scripts/test-original-core.ts",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,md}\" \"*.{ts,tsx,js,jsx,json,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,md}\" \"*.{ts,tsx,js,jsx,json,md}\"",
     "lint": "eslint \"src/**/*.{ts,tsx,js,jsx}\" --fix",
