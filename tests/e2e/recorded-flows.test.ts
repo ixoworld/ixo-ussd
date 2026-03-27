@@ -8,7 +8,7 @@ import {
   expect,
   it,
 } from "vitest";
-import { messages as brandingMessages } from "../../constants/branding.js";
+import { messages as brandingMessages } from "../../src/constants/branding.js";
 import {
   ReplaySession,
   ReplayTestHelper,

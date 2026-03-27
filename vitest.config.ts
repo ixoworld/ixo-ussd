@@ -24,7 +24,7 @@ export default defineConfig({
         "**/*.d.ts",
         "**/*.test.{ts,tsx}",
         "**/*.spec.{ts,tsx}",
-        "src/test/**/*",
+        "tests/**/*",
         "src/**/__tests__/**/*",
         "src/**/__mocks__/**/*",
         "src/index.ts",
@@ -38,8 +38,8 @@ export default defineConfig({
     exclude: [
       "dist/**",
       "**/node_modules/**",
-      "**/src/test/integration/**", // Exclude integration tests that require Docker containers
-      "**/src/test/e2e/recorded-flows.test.ts", // Exclude recorded flows - run manually with test:replay
+      "**/tests/integration/**", // Exclude integration tests that require Docker containers
+      "**/tests/e2e/recorded-flows.test.ts", // Exclude recorded flows - run manually with test:replay
     ],
   },
   // Support for path aliases from tsconfig.json

@@ -1,5 +1,5 @@
-import { config, ENV } from "../../config.js";
-import { getIxoConfig } from "../../services/ixo/config.js";
+import { config, ENV } from "../../src/config.js";
+import { getIxoConfig } from "../../src/services/ixo/config.js";
 
 export type TestEnvironment = "real" | "mocked";
 
@@ -43,7 +43,7 @@ export class EnvironmentSetup {
         environment === "real" && process.env.USE_REAL_IXO_SERVICES === "true",
       useRealMatrix:
         environment === "real" && process.env.USE_REAL_MATRIX === "true",
-      mockDataPath: process.env.MOCK_DATA_PATH || "src/test/fixtures/mock-data",
+      mockDataPath: process.env.MOCK_DATA_PATH || "tests/fixtures/mock-data",
       logLevel: (process.env.TEST_LOG_LEVEL as any) || "warn",
     };
   }

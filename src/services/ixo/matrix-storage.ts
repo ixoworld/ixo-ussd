@@ -95,7 +95,9 @@ export async function handleMatrixOnboarding(params: {
 
     // Login or register Matrix account
     mxPassword = generatePasswordFromMnemonic(mxMnemonic);
-    logger.info({ mxPassword }, "mxPassword generated");
+    if (process.env.NODE_ENV !== "production") {
+      logger.debug({ mxPassword }, "mxPassword generated");
+    }
     account = await loginOrRegisterMatrixAccount({
       homeServerUrl,
       username: mxUsername,

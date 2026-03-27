@@ -8,7 +8,7 @@
  * to test the environment detection functionality itself.
  */
 
-import { ENV, getCurrentEnvironment } from "../../config.js";
+import { ENV, getCurrentEnvironment } from "../../src/config.js";
 
 console.log("🧪 Testing Centralized Environment Configuration\n");
 

@@ -1,12 +1,28 @@
 import { vi } from "vitest";
 import dotenv from "dotenv";
 import path from "path";
-import { EnvironmentSetup } from "../src/test/helpers/environment-setup.js";
 
 // Load environment variables from .env file
 const envPath = path.resolve(process.cwd(), ".env.test");
 console.log("Loading test environment variables from:", envPath);
 dotenv.config({ path: envPath });
+
+// Set required environment variables for tests if not already set
+if (!process.env.DATABASE_URL) {
+  process.env.DATABASE_URL =
+    "postgres://test:test@localhost:5432/ixo-ussd-test";
+}
+if (!process.env.LOG_LEVEL) {
+  process.env.LOG_LEVEL = "silent";
+}
+if (!process.env.PIN_ENCRYPTION_KEY) {
+  process.env.PIN_ENCRYPTION_KEY = "test-encryption-key-for-unit-tests-only";
+}
+
+// Import EnvironmentSetup after env vars are set (config.ts validates on import)
+const { EnvironmentSetup } = await import(
+  "../tests/helpers/environment-setup.js"
+);
 
 // Initialize environment setup for tests
 const environmentSetup = new EnvironmentSetup();

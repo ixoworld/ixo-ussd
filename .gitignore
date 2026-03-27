@@ -24,3 +24,5 @@ console-output-*.*
 coverage/
 .nyc_output/
 *.lcov
+tests/**/*.js
+tests/**/*.js.map

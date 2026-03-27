@@ -12,8 +12,8 @@ import dotenv from "dotenv";
 import fs from "fs";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import path from "path";
-import { CHAIN_RPC_URL } from "../../constants/ixo-blockchain.js";
-import { createIxoAccount } from "../../services/ixo/ixo-profile.js";
+import { CHAIN_RPC_URL } from "../../src/constants/ixo-blockchain.js";
+import { createIxoAccount } from "../../src/services/ixo/ixo-profile.js";
 
 // Load environment variables from project root .env file
 const envPath = path.resolve(__dirname, "../.env");

@@ -7,9 +7,9 @@
  */
 
 import dotenv from "dotenv";
-import { dataService } from "../../services/database-storage.js";
-import { createIxoAccount } from "../../services/ixo/ixo-profile.js";
-import { postgresService } from "../../services/postgres.js";
+import { dataService } from "../../src/services/database-storage.js";
+import { createIxoAccount } from "../../src/services/ixo/ixo-profile.js";
+import { postgresService } from "../../src/services/postgres.js";
 
 // Load environment variables
 dotenv.config();

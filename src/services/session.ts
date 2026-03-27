@@ -81,7 +81,9 @@ export class SessionService {
 
       if (!actor) {
         // Create new session
-        console.log(`🆕 Creating new session: ${sessionId}`);
+        if (process.env.NODE_ENV !== "production") {
+          console.log(`🆕 Creating new session: ${sessionId}`);
+        }
 
         // Step 1: Create or update phone record (progressive data)
         await this.handlePhoneRecord(phoneNumber);
@@ -109,23 +111,29 @@ export class SessionService {
         };
         actor.send(dialEvent);
 
-        console.log(`📞 Sent DIAL_USSD event for ${phoneNumber}`);
+        if (process.env.NODE_ENV !== "production") {
+          console.log(`📞 Sent DIAL_USSD event for ${phoneNumber}`);
+        }
       } else {
         // Process user input
         if (text) {
-          console.log(`📝 Processing input: "${text}"`);
+          if (process.env.NODE_ENV !== "production") {
+            console.log(`📝 Processing input: "${text}"`);
+          }
           this.processUserInput(actor, text);
         }
       }
 
       const snapshot = actor.getSnapshot();
-      console.log(`🎯 Current state: ${snapshot.value}`);
-      console.log(
-        `💬 Context message: ${snapshot.context?.message.substring(0, 10)}`
-      );
-      console.log(
-        `Snapshot Children: ${Object.keys(snapshot.children).length}`
-      );
+      if (process.env.NODE_ENV !== "production") {
+        console.log(`🎯 Current state: ${snapshot.value}`);
+        console.log(
+          `💬 Context message: ${snapshot.context?.message.substring(0, 10)}`
+        );
+        console.log(
+          `Snapshot Children: ${Object.keys(snapshot.children).length}`
+        );
+      }
 
       const response = this.generateResponse(snapshot);
 
@@ -155,7 +163,9 @@ export class SessionService {
       type: parsedEvent.type,
       ...(parsedEvent.value && { input: parsedEvent.value }),
     };
-    console.log(`🎮 Sending Event:`, event);
+    if (process.env.NODE_ENV !== "production") {
+      console.log(`🎮 Sending Event:`, event);
+    }
 
     actor.send(event);
   }
@@ -176,7 +186,9 @@ export class SessionService {
     if (actor) {
       actor.stop();
       sessions.delete(sessionId);
-      console.log(`🧹 Session cleaned up: ${sessionId}`);
+      if (process.env.NODE_ENV !== "production") {
+        console.log(`🧹 Session cleaned up: ${sessionId}`);
+      }
     }
   }
 

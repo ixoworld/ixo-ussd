@@ -6,9 +6,9 @@
  * and verifying the timestamp-based customer ID generation.
  */
 
-import { dataService } from "../../services/database-storage.js";
-import { generateUniqueCustomerId } from "../../utils/customer-id.js";
-import { databaseManager } from "../../services/database-manager.js";
+import { dataService } from "../../src/services/database-storage.js";
+import { generateUniqueCustomerId } from "../../src/utils/customer-id.js";
+import { databaseManager } from "../../src/services/database-manager.js";
 
 // Test data for 10 customers
 const testCustomers = [

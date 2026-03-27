@@ -5,7 +5,7 @@
  * Tests the new high-precision timestamp + deterministic hash approach
  */
 
-import { generateUniqueCustomerId } from "../../utils/customer-id.js";
+import { generateUniqueCustomerId } from "../../src/utils/customer-id.js";
 
 console.log("🔢 Testing High-Precision Customer ID Generation");
 console.log("================================================");
