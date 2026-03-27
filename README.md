@@ -110,7 +110,7 @@ pnpm test
 pnpm test:integration
 ```
 
-- **Unit tests** — 142 tests with mocked database, IXO, and Matrix services
+- **Unit tests** — 126 tests with mocked database, IXO, and Matrix services
 - **Integration flow tests** — 88 tests that replay recorded USSD sessions against a live server with an ephemeral database
 
 See **[Testing Guide](./docs/TESTING.md)** for full details on running, recording, and adding new flow tests.
