@@ -28,6 +28,7 @@ It’s built to be adaptable: fork this repo, start with the vanilla setup, and 
 - ⚡ **Fast & lightweight** — optimised for low-latency menu navigation
 - 🔐 **Secure** — robust PIN handling, session management, and private data vaults
 - 🔗 **Integrates** with IXO blockchain and Web3 identity tools
+- 🐳 **Integration test pipeline** — record and replay USSD flows against ephemeral databases
 
 ---
 
@@ -59,8 +60,11 @@ pnpm dev
 ### 3. Test
 
 ```bash
-# Test USSD flows interactively
-pnpm test:interactive
+# Run unit tests
+pnpm test
+
+# Run integration flow tests (requires Docker)
+pnpm test:integration
 ```
 
 **Need detailed setup help?** → [Getting Started Guide](./docs/GETTING_STARTED.md)
@@ -78,6 +82,7 @@ pnpm test:interactive
 - **[Architecture Patterns](./docs/ARCHITECTURE_PATTERNS_GUIDE.md)** - State machine design patterns and best practices
 - **[State Machine Development](./docs/STATE_MACHINE_PATTERNS.md)** - Development workflow and testing patterns
 - **[Demo Files Guide](./docs/DEMO_FILES_GUIDE.md)** - Interactive development and testing tools
+- **[Testing Guide](./docs/TESTING.md)** - Unit tests, integration flow tests, and recording new flows
 
 ---
 
@@ -98,10 +103,17 @@ See our [Contributing Guide](./docs/CONTRIBUTING.md) and our [Code of Conduct](.
 ## 🧪 Tests
 
 ```bash
+# Unit tests (mocked services)
 pnpm test
+
+# Integration flow tests (ephemeral Postgres via Docker)
+pnpm test:integration
 ```
 
-We use GitHub Actions for CI — all pull requests run the test suite automatically.
+- **Unit tests** — 142 tests with mocked database, IXO, and Matrix services
+- **Integration flow tests** — 88 tests that replay recorded USSD sessions against a live server with an ephemeral database
+
+See **[Testing Guide](./docs/TESTING.md)** for full details on running, recording, and adding new flow tests.
 
 ---
 

@@ -1,47 +1,116 @@
-# Generated Flow Tests
+# Integration Flow Tests
 
-This directory contains automatically generated Vitest tests created from recorded USSD sessions.
+This directory contains integration tests that replay recorded USSD sessions against a live server with an ephemeral database. Each flow is stored as a JSON fixture paired with a generated Vitest test file.
 
 ## Quick Start
 
 ```bash
-# Record all flows against a clean ephemeral database
-pnpm test:integration:record
-
-# Replay all recorded flows
+# Run the full pipeline (Docker required): container → server → tests → teardown
 pnpm test:integration
 
-# Run flow tests against an already-running server
+# Record new flows (regenerates all fixtures and tests)
+pnpm test:integration:record
+
+# Run flow tests only (server must already be running)
 pnpm test:flows:run
 ```
 
-## How It Works
+## What Are Flow Tests?
 
-The integration test pipeline:
+Flow tests are **integration tests** that replay complete USSD interaction sequences. Unlike unit tests (which mock the database, IXO, and Matrix services), flow tests:
 
-1. **Starts** an ephemeral Postgres container (via testcontainers)
-2. **Initializes** the database schema
-3. **Starts** the USSD server against the test database
-4. **Records** all flows by sending USSD requests programmatically
-5. **Generates** JSON fixtures and Vitest test files
-6. **Tears down** everything
+- Send real HTTP requests to a running USSD server
+- Use a real PostgreSQL database (ephemeral, via testcontainers)
+- Validate the complete request → state machine → response pipeline
+- Run sequentially (flows share database state across phases)
 
-## Directory Structure
+Each test case sends a USSD request and asserts the server's exact response text.
+
+## How to Run
+
+### Full Pipeline (Recommended)
+
+```bash
+pnpm test:integration
+```
+
+This command handles the entire lifecycle:
+
+1. Spins up an **ephemeral Postgres** container (via [testcontainers](https://node.testcontainers.org/))
+2. Runs `migrations/postgres/000-init-all.sql` to create the schema
+3. Starts the USSD server against the test database
+4. Waits for `/health` to respond
+5. Runs all flow tests via Vitest
+6. Tears down the server and container
+
+**Prerequisite:** Docker must be running.
+
+### Tests Only (Manual Server)
+
+If you already have a server running with a clean database:
+
+```bash
+pnpm test:flows:run
+```
+
+This skips the container/server lifecycle and runs tests directly.
+
+## How to Record New Flows
+
+### Re-record all flows
+
+```bash
+pnpm test:integration:record
+```
+
+This runs the same pipeline as `test:integration`, but instead of replaying tests, it executes `tests/scripts/record-all-flows.ts` which programmatically walks every flow and generates fresh JSON fixtures and test files.
+
+### Add a new flow definition
+
+Edit `tests/scripts/record-all-flows.ts` to add flow steps:
+
+```typescript
+recorded.push({
+  fixture: await recordFlow(
+    "05-my-custom-flow",
+    [
+      "", // Initial dial
+      "2", // Account Menu
+      "1", // Login
+      customerId, // Dynamic value from earlier phase
+      TEST_PIN, // PIN
+      "1", // Continue
+      // ... your flow steps
+    ],
+    "Description of my custom flow"
+  ),
+  metadata: { needsCustomerId: true, recordedCustomerId: customerId },
+});
+```
+
+Then record: `pnpm test:integration:record`
+
+## File Structure
+
+Each flow produces a **pair** of files:
 
 ```
 tests/fixtures/flows/
-├── README.md           # This file
-├── setup.ts            # Flow test setup (DB helpers, env config)
-├── 01-*.json           # Pre-auth flow fixtures
-├── 01-*.test.ts        # Pre-auth flow tests
-├── 02-*.json           # Account creation fixtures
-├── 02-*.test.ts        # Account creation tests
-├── 03-*.json           # Login flow fixtures
-├── 03-*.test.ts        # Login flow tests
-└── 04-*.json/test.ts   # Navigation edge case fixtures/tests
+├── setup.ts                              # Flow test setup (env config, no mocks)
+├── 01-know-more-flow.json                # Recorded fixture (turns + metadata)
+├── 01-know-more-flow.test.ts             # Generated Vitest test
+├── 02-create-account-full.json
+├── 02-create-account-full.test.ts
+├── 03-login-success.json
+├── 03-login-success.test.ts
+└── ...
 ```
 
-## Default Flows (example machine)
+- **`.json` fixtures** — Contain session metadata and an array of turns (input → expected response)
+- **`.test.ts` files** — Generated Vitest tests that load the fixture and replay each turn
+- **Numbered prefixes** (`01-`, `02-`, etc.) control execution order since flows share database state
+
+## Default Flows (Example Machine)
 
 | Phase | Flow                             | Description                            |
 | ----- | -------------------------------- | -------------------------------------- |
@@ -57,36 +126,22 @@ tests/fixtures/flows/
 | 4     | `04-exit-from-any-menu`          | Exit via \* from deep menu             |
 | 4     | `04-back-navigation-chain`       | Multi-level back navigation            |
 
-## Adding Custom Flows (for forks)
+## For Forks: Adding Custom Flows
 
-If your fork adds new USSD machine types with additional flows:
+If your fork adds new USSD machines with additional flows:
 
-1. **Create a custom recorder** — copy `tests/scripts/record-all-flows.ts` and add phases for your new flows
-2. **Set `USSD_MACHINE_TYPE`** — configure the test runner to use your machine type
-3. **Follow the naming convention** — use numbered prefixes (`05-*`, `06-*`) to control execution order
-4. **Record and commit** — run `pnpm test:integration:record` and commit the generated fixtures
+1. **Copy** `tests/scripts/record-all-flows.ts` to your fork
+2. **Add phases** for your custom flows using numbered prefixes (`05-*`, `06-*`)
+3. **Set `USSD_MACHINE_TYPE`** in the test runner environment if your fork uses a different machine type
+4. **Record**: `pnpm test:integration:record`
+5. **Commit** the generated fixtures and tests
 
-### Example: Adding a new flow
+## Key Design Decisions
 
-```typescript
-// In your custom record-all-flows.ts
-recorded.push({
-  fixture: await recordFlow(
-    "05-my-custom-flow",
-    [
-      "", // Initial dial
-      "2", // Account Menu
-      "1", // Login
-      customerId, // Dynamic customer ID
-      TEST_PIN, // PIN
-      "1", // Continue
-      // ... your custom flow steps
-    ],
-    "Description of my custom flow"
-  ),
-  metadata: { needsCustomerId: true, recordedCustomerId: customerId },
-});
-```
+- **Ephemeral database** — Each test run starts from a clean schema, ensuring reproducibility
+- **Sequential execution** — Flows run in order because later phases depend on data created by earlier ones (e.g., login requires a previously created account)
+- **Dynamic value substitution** — The recorder captures values like Customer IDs at runtime and injects them into later flow steps
+- **Cumulative USSD text** — Each turn sends the full accumulated input (e.g., `"1*2*3"`) matching real USSD gateway behaviour
 
 ## Environment Variables
 
@@ -101,16 +156,18 @@ recorded.push({
 
 ### Tests fail with response mismatch
 
-The server responses have changed since flows were recorded. Re-record:
+Server responses have changed since flows were recorded. Re-record:
 
 ```bash
 pnpm test:integration:record
 ```
 
-### Container fails to start
+### Docker / container fails to start
 
-Make sure Docker is running and accessible.
+Ensure Docker is running: `docker info`. The pipeline uses [testcontainers](https://node.testcontainers.org/) which requires a Docker-compatible runtime.
 
 ### Tests timeout
 
-Increase `testTimeout` in `vitest.flows.config.ts` or check server logs for errors.
+- Increase `testTimeout` in `vitest.flows.config.ts` (default: 60s)
+- Check server logs for startup errors
+- Ensure the database schema migration ran successfully

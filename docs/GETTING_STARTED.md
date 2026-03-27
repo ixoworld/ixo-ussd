@@ -9,6 +9,7 @@ Complete setup guide for development and production environments.
 - **Node.js 20+** - [Download here](https://nodejs.org/)
 - **PostgreSQL 14+** - [Download here](https://postgresql.org/download/)
 - **pnpm** - Install with `npm install -g pnpm`
+- **Docker** _(optional)_ - Required for integration tests (testcontainers). [Download here](https://docs.docker.com/get-docker/)
 
 **System Requirements:**
 
@@ -105,19 +106,19 @@ Server runs at `http://localhost:3000`
 
 ## 🧪 Test Your Setup
 
-**Interactive USSD Test:**
+**Run unit tests:**
 
 ```bash
-pnpm test:interactive
+pnpm test
 ```
 
-**Test Flow:**
+**Run integration flow tests (requires Docker):**
 
-1. Press **Enter** (initial dial)
-2. Type **1** (Know More menu)
-3. Type **1** (Product information)
-4. Type **0** (Back)
-5. Type **\*** (Exit)
+```bash
+pnpm test:integration
+```
+
+See the [Testing Guide](TESTING.md) for full details on both test tiers.
 
 ## 🔧 Environment Variables
 
