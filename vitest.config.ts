@@ -40,6 +40,7 @@ export default defineConfig({
       "**/node_modules/**",
       "**/tests/integration/**", // Exclude integration tests that require Docker containers
       "**/tests/e2e/recorded-flows.test.ts", // Exclude recorded flows - run manually with test:replay
+      "**/tests/fixtures/flows/**", // Exclude generated flow tests - run with test:flows or test:integration
     ],
   },
   // Support for path aliases from tsconfig.json

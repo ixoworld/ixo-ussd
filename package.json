@@ -19,9 +19,13 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,md}\" \"*.{ts,tsx,js,jsx,json,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,md}\" \"*.{ts,tsx,js,jsx,json,md}\"",
     "lint": "eslint \"src/**/*.{ts,tsx,js,jsx}\" --fix",
-    "validate:machines": "node tests/scripts/validate-machines.js",
     "prepare": "husky install",
-    "view:db-queries": "NODE_OPTIONS='--loader ts-node/esm' ts-node --require dotenv/config tests/scripts/db-queries.ts"
+    "view:db-queries": "NODE_OPTIONS='--loader ts-node/esm' ts-node --require dotenv/config tests/scripts/db-queries.ts",
+    "test:integration": "NODE_OPTIONS='--loader ts-node/esm' ts-node tests/scripts/test-integration-flows.ts",
+    "test:integration:record": "NODE_OPTIONS='--loader ts-node/esm' ts-node tests/scripts/test-integration-flows.ts --record",
+    "record:flows": "NODE_OPTIONS='--loader ts-node/esm' ts-node tests/scripts/record-all-flows.ts",
+    "test:flows": "vitest --config vitest.flows.config.ts",
+    "test:flows:run": "vitest run --config vitest.flows.config.ts"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,js,jsx}": [
@@ -52,7 +56,6 @@
     "@types/blocked-at": "^1.0.4",
     "@types/md5": "^2.3.5",
     "@types/node": "^24.2.0",
-    "@types/pg": "^8.15.5",
     "@types/react-dom": "^19.1.7",
     "africastalking": "^0.7.3",
     "axios": "1.11.0",
@@ -77,7 +80,6 @@
     "moment-timezone": "^0.6.0",
     "nats": "^2.29.3",
     "newman": "^6.2.1",
-    "pg": "^8.16.3",
     "pino": "^9.7.0",
     "protobufjs": "^7.5.3",
     "secure-web-storage": "1.0.2",
@@ -95,6 +97,7 @@
     "@types/autocannon": "^7.12.7",
     "@types/crypto-js": "4.2.2",
     "@types/node": "^18.0.0",
+    "@types/pg": "^8.15.5",
     "@vitest/coverage-v8": "^3.2.4",
     "auto-changelog": "^2.5.0",
     "autocannon": "^8.0.0",
@@ -103,6 +106,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.1.4",
     "madge": "^8.0.0",
+    "pg": "^8.16.3",
     "release-it": "^19.0.4",
     "rimraf": "^6.0.1",
     "testcontainers": "^11.5.0",
@@ -124,7 +128,7 @@
     "pino-debug": "^3.0.0",
     "pino-pretty": "^13.1.1",
     "prettier": "^3.6.2",
-    "typesafe-i18n": "^5.26.2",
-    "ts-standard": "^12.0.2"
+    "ts-standard": "^12.0.2",
+    "typesafe-i18n": "^5.26.2"
   }
 }
