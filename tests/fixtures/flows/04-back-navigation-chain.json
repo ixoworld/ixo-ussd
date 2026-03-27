@@ -1,0 +1,75 @@
+{
+  "flowName": "04-back-navigation-chain",
+  "timestamp": "2026-03-27T14:05:38.357Z",
+  "sessionId": "rec-04-back-navigation-chain-1774620332820-11",
+  "phoneNumber": "+260971230001",
+  "serviceCode": "*2233#",
+  "turns": [
+    {
+      "textSent": "",
+      "serverReply": "CON Welcome to USSD Example App\n1. Know More\n2. Account Menu\n*. Exit",
+      "sessionId": "rec-04-back-navigation-chain-1774620332820-11",
+      "timestamp": "2026-03-27T14:05:32.829Z"
+    },
+    {
+      "textSent": "2",
+      "serverReply": "CON Account Menu\n\nDo you have an existing account?\n1. Yes, log me in\n2. No, create my account\n0. Back",
+      "sessionId": "rec-04-back-navigation-chain-1774620332820-11",
+      "timestamp": "2026-03-27T14:05:33.330Z"
+    },
+    {
+      "textSent": "0",
+      "serverReply": "CON Welcome to USSD Example App\n1. Know More\n2. Account Menu\n*. Exit",
+      "sessionId": "rec-04-back-navigation-chain-1774620332820-11",
+      "timestamp": "2026-03-27T14:05:33.831Z"
+    },
+    {
+      "textSent": "1",
+      "serverReply": "CON Welcome to USSD Example App Information Center\n1. Interested in Product\n2. Pricing & accessories\n3. Can we deliver to you?\n0. Back",
+      "sessionId": "rec-04-back-navigation-chain-1774620332820-11",
+      "timestamp": "2026-03-27T14:05:34.334Z"
+    },
+    {
+      "textSent": "1",
+      "serverReply": "CON Thank you for your interest. We have sent you a SMS with more information.\n1. Back to Main Menu\n0. Back",
+      "sessionId": "rec-04-back-navigation-chain-1774620332820-11",
+      "timestamp": "2026-03-27T14:05:34.836Z"
+    },
+    {
+      "textSent": "0",
+      "serverReply": "CON Welcome to USSD Example App Information Center\n1. Interested in Product\n2. Pricing & accessories\n3. Can we deliver to you?\n0. Back",
+      "sessionId": "rec-04-back-navigation-chain-1774620332820-11",
+      "timestamp": "2026-03-27T14:05:35.338Z"
+    },
+    {
+      "textSent": "0",
+      "serverReply": "CON Welcome to USSD Example App\n1. Know More\n2. Account Menu\n*. Exit",
+      "sessionId": "rec-04-back-navigation-chain-1774620332820-11",
+      "timestamp": "2026-03-27T14:05:35.852Z"
+    },
+    {
+      "textSent": "2",
+      "serverReply": "CON Account Menu\n\nDo you have an existing account?\n1. Yes, log me in\n2. No, create my account\n0. Back",
+      "sessionId": "rec-04-back-navigation-chain-1774620332820-11",
+      "timestamp": "2026-03-27T14:05:36.353Z"
+    },
+    {
+      "textSent": "2",
+      "serverReply": "CON Welcome to USSD Example App\nEnter your full name:\n0. Back",
+      "sessionId": "rec-04-back-navigation-chain-1774620332820-11",
+      "timestamp": "2026-03-27T14:05:36.856Z"
+    },
+    {
+      "textSent": "0",
+      "serverReply": "CON Account Menu\n\nDo you have an existing account?\n1. Yes, log me in\n2. No, create my account\n0. Back",
+      "sessionId": "rec-04-back-navigation-chain-1774620332820-11",
+      "timestamp": "2026-03-27T14:05:37.356Z"
+    },
+    {
+      "textSent": "0",
+      "serverReply": "CON Welcome to USSD Example App\n1. Know More\n2. Account Menu\n*. Exit",
+      "sessionId": "rec-04-back-navigation-chain-1774620332820-11",
+      "timestamp": "2026-03-27T14:05:37.857Z"
+    }
+  ]
+}

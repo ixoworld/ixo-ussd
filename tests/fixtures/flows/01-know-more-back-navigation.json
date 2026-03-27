@@ -1,0 +1,51 @@
+{
+  "flowName": "01-know-more-back-navigation",
+  "timestamp": "2026-03-27T14:04:59.516Z",
+  "sessionId": "rec-01-know-more-back-navigation-1774620295991-2",
+  "phoneNumber": "+260971230001",
+  "serviceCode": "*2233#",
+  "turns": [
+    {
+      "textSent": "",
+      "serverReply": "CON Welcome to USSD Example App\n1. Know More\n2. Account Menu\n*. Exit",
+      "sessionId": "rec-01-know-more-back-navigation-1774620295991-2",
+      "timestamp": "2026-03-27T14:04:56.003Z"
+    },
+    {
+      "textSent": "1",
+      "serverReply": "CON Welcome to USSD Example App Information Center\n1. Interested in Product\n2. Pricing & accessories\n3. Can we deliver to you?\n0. Back",
+      "sessionId": "rec-01-know-more-back-navigation-1774620295991-2",
+      "timestamp": "2026-03-27T14:04:56.505Z"
+    },
+    {
+      "textSent": "2",
+      "serverReply": "CON Thank you for your interest. We have sent you a SMS with more information.\n1. Back to Main Menu\n0. Back",
+      "sessionId": "rec-01-know-more-back-navigation-1774620295991-2",
+      "timestamp": "2026-03-27T14:04:57.007Z"
+    },
+    {
+      "textSent": "0",
+      "serverReply": "CON Welcome to USSD Example App Information Center\n1. Interested in Product\n2. Pricing & accessories\n3. Can we deliver to you?\n0. Back",
+      "sessionId": "rec-01-know-more-back-navigation-1774620295991-2",
+      "timestamp": "2026-03-27T14:04:57.510Z"
+    },
+    {
+      "textSent": "3",
+      "serverReply": "CON Thank you for your interest. We have sent you a SMS with more information.\n1. Back to Main Menu\n0. Back",
+      "sessionId": "rec-01-know-more-back-navigation-1774620295991-2",
+      "timestamp": "2026-03-27T14:04:58.012Z"
+    },
+    {
+      "textSent": "0",
+      "serverReply": "CON Welcome to USSD Example App Information Center\n1. Interested in Product\n2. Pricing & accessories\n3. Can we deliver to you?\n0. Back",
+      "sessionId": "rec-01-know-more-back-navigation-1774620295991-2",
+      "timestamp": "2026-03-27T14:04:58.514Z"
+    },
+    {
+      "textSent": "0",
+      "serverReply": "CON Welcome to USSD Example App\n1. Know More\n2. Account Menu\n*. Exit",
+      "sessionId": "rec-01-know-more-back-navigation-1774620295991-2",
+      "timestamp": "2026-03-27T14:04:59.017Z"
+    }
+  ]
+}
