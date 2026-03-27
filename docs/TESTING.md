@@ -6,7 +6,7 @@ IXO USSD has two tiers of automated tests: **unit tests** and **integration flow
 
 | Tier        | Command                 | Tests | What it does                          |
 | ----------- | ----------------------- | ----- | ------------------------------------- |
-| Unit        | `pnpm test`             | 142   | Fast, mocked services                 |
+| Unit        | `pnpm test`             | 126   | Fast, mocked services                 |
 | Integration | `pnpm test:integration` | 88    | Full pipeline with ephemeral Postgres |
 
 ---
