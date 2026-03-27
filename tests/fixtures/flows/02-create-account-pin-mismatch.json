@@ -1,0 +1,75 @@
+{
+  "flowName": "02-create-account-pin-mismatch",
+  "timestamp": "2026-03-27T14:05:18.657Z",
+  "sessionId": "rec-02-create-account-pin-mismatch-1774620313115-6",
+  "phoneNumber": "+260971230001",
+  "serviceCode": "*2233#",
+  "turns": [
+    {
+      "textSent": "",
+      "serverReply": "CON Welcome to USSD Example App\n1. Know More\n2. Account Menu\n*. Exit",
+      "sessionId": "rec-02-create-account-pin-mismatch-1774620313115-6",
+      "timestamp": "2026-03-27T14:05:13.123Z"
+    },
+    {
+      "textSent": "2",
+      "serverReply": "CON Account Menu\n\nDo you have an existing account?\n1. Yes, log me in\n2. No, create my account\n0. Back",
+      "sessionId": "rec-02-create-account-pin-mismatch-1774620313115-6",
+      "timestamp": "2026-03-27T14:05:13.625Z"
+    },
+    {
+      "textSent": "2",
+      "serverReply": "CON Welcome to USSD Example App\nEnter your full name:\n0. Back",
+      "sessionId": "rec-02-create-account-pin-mismatch-1774620313115-6",
+      "timestamp": "2026-03-27T14:05:14.127Z"
+    },
+    {
+      "textSent": "Charlie Davis",
+      "serverReply": "CON Enter your email address (optional):\n00. Skip\n0. Back",
+      "sessionId": "rec-02-create-account-pin-mismatch-1774620313115-6",
+      "timestamp": "2026-03-27T14:05:14.629Z"
+    },
+    {
+      "textSent": "00",
+      "serverReply": "CON Create a 5-digit PIN for your account:\n0. Back",
+      "sessionId": "rec-02-create-account-pin-mismatch-1774620313115-6",
+      "timestamp": "2026-03-27T14:05:15.131Z"
+    },
+    {
+      "textSent": "43219",
+      "serverReply": "CON Confirm your 5-digit PIN:\n0. Back",
+      "sessionId": "rec-02-create-account-pin-mismatch-1774620313115-6",
+      "timestamp": "2026-03-27T14:05:15.645Z"
+    },
+    {
+      "textSent": "99999",
+      "serverReply": "CON Create a 5-digit PIN for your account:\n0. Back",
+      "sessionId": "rec-02-create-account-pin-mismatch-1774620313115-6",
+      "timestamp": "2026-03-27T14:05:16.149Z"
+    },
+    {
+      "textSent": "43219",
+      "serverReply": "CON Confirm your 5-digit PIN:\n0. Back",
+      "sessionId": "rec-02-create-account-pin-mismatch-1774620313115-6",
+      "timestamp": "2026-03-27T14:05:16.650Z"
+    },
+    {
+      "textSent": "43219",
+      "serverReply": "CON Creating your account...\n1. View your Customer ID",
+      "sessionId": "rec-02-create-account-pin-mismatch-1774620313115-6",
+      "timestamp": "2026-03-27T14:05:17.152Z"
+    },
+    {
+      "textSent": "1",
+      "serverReply": "CON Account created successfully!\nYour Customer ID: C8068367A\nSave your Customer ID to access services.\n1. Back to Account Menu",
+      "sessionId": "rec-02-create-account-pin-mismatch-1774620313115-6",
+      "timestamp": "2026-03-27T14:05:17.654Z"
+    },
+    {
+      "textSent": "1",
+      "serverReply": "CON Account Menu\n\nDo you have an existing account?\n1. Yes, log me in\n2. No, create my account\n0. Back",
+      "sessionId": "rec-02-create-account-pin-mismatch-1774620313115-6",
+      "timestamp": "2026-03-27T14:05:18.156Z"
+    }
+  ]
+}

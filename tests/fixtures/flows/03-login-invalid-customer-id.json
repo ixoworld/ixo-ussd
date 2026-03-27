@@ -1,0 +1,39 @@
+{
+  "flowName": "03-login-invalid-customer-id",
+  "timestamp": "2026-03-27T14:05:30.803Z",
+  "sessionId": "rec-03-login-invalid-customer-id-1774620328284-9",
+  "phoneNumber": "+260971230001",
+  "serviceCode": "*2233#",
+  "turns": [
+    {
+      "textSent": "",
+      "serverReply": "CON Welcome to USSD Example App\n1. Know More\n2. Account Menu\n*. Exit",
+      "sessionId": "rec-03-login-invalid-customer-id-1774620328284-9",
+      "timestamp": "2026-03-27T14:05:28.296Z"
+    },
+    {
+      "textSent": "2",
+      "serverReply": "CON Account Menu\n\nDo you have an existing account?\n1. Yes, log me in\n2. No, create my account\n0. Back",
+      "sessionId": "rec-03-login-invalid-customer-id-1774620328284-9",
+      "timestamp": "2026-03-27T14:05:28.798Z"
+    },
+    {
+      "textSent": "1",
+      "serverReply": "CON Enter your Customer ID to log in:\n0. Back",
+      "sessionId": "rec-03-login-invalid-customer-id-1774620328284-9",
+      "timestamp": "2026-03-27T14:05:29.299Z"
+    },
+    {
+      "textSent": "CNOTEXIST99",
+      "serverReply": "CON Verifying Customer ID...\n1. Continue\n0. Back",
+      "sessionId": "rec-03-login-invalid-customer-id-1774620328284-9",
+      "timestamp": "2026-03-27T14:05:29.801Z"
+    },
+    {
+      "textSent": "1",
+      "serverReply": "CON Enter your Customer ID to log in:\n0. Back",
+      "sessionId": "rec-03-login-invalid-customer-id-1774620328284-9",
+      "timestamp": "2026-03-27T14:05:30.303Z"
+    }
+  ]
+}

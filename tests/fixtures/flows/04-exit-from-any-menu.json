@@ -1,0 +1,33 @@
+{
+  "flowName": "04-exit-from-any-menu",
+  "timestamp": "2026-03-27T14:05:32.820Z",
+  "sessionId": "rec-04-exit-from-any-menu-1774620330803-10",
+  "phoneNumber": "+260971230001",
+  "serviceCode": "*2233#",
+  "turns": [
+    {
+      "textSent": "",
+      "serverReply": "CON Welcome to USSD Example App\n1. Know More\n2. Account Menu\n*. Exit",
+      "sessionId": "rec-04-exit-from-any-menu-1774620330803-10",
+      "timestamp": "2026-03-27T14:05:30.813Z"
+    },
+    {
+      "textSent": "1",
+      "serverReply": "CON Welcome to USSD Example App Information Center\n1. Interested in Product\n2. Pricing & accessories\n3. Can we deliver to you?\n0. Back",
+      "sessionId": "rec-04-exit-from-any-menu-1774620330803-10",
+      "timestamp": "2026-03-27T14:05:31.315Z"
+    },
+    {
+      "textSent": "1",
+      "serverReply": "CON Thank you for your interest. We have sent you a SMS with more information.\n1. Back to Main Menu\n0. Back",
+      "sessionId": "rec-04-exit-from-any-menu-1774620330803-10",
+      "timestamp": "2026-03-27T14:05:31.817Z"
+    },
+    {
+      "textSent": "*",
+      "serverReply": "CON Welcome to USSD Example App\n1. Know More\n2. Account Menu\n*. Exit",
+      "sessionId": "rec-04-exit-from-any-menu-1774620330803-10",
+      "timestamp": "2026-03-27T14:05:32.319Z"
+    }
+  ]
+}

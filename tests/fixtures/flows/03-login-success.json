@@ -1,0 +1,63 @@
+{
+  "flowName": "03-login-success",
+  "timestamp": "2026-03-27T14:05:23.235Z",
+  "sessionId": "rec-03-login-success-1774620318699-7",
+  "phoneNumber": "+260971230001",
+  "serviceCode": "*2233#",
+  "turns": [
+    {
+      "textSent": "",
+      "serverReply": "CON Welcome to USSD Example App\n1. Know More\n2. Account Menu\n*. Exit",
+      "sessionId": "rec-03-login-success-1774620318699-7",
+      "timestamp": "2026-03-27T14:05:18.703Z"
+    },
+    {
+      "textSent": "2",
+      "serverReply": "CON Account Menu\n\nDo you have an existing account?\n1. Yes, log me in\n2. No, create my account\n0. Back",
+      "sessionId": "rec-03-login-success-1774620318699-7",
+      "timestamp": "2026-03-27T14:05:19.207Z"
+    },
+    {
+      "textSent": "1",
+      "serverReply": "CON Enter your Customer ID to log in:\n0. Back",
+      "sessionId": "rec-03-login-success-1774620318699-7",
+      "timestamp": "2026-03-27T14:05:19.708Z"
+    },
+    {
+      "textSent": "CE3D5D483",
+      "serverReply": "CON Verifying Customer ID...\n1. Continue\n0. Back",
+      "sessionId": "rec-03-login-success-1774620318699-7",
+      "timestamp": "2026-03-27T14:05:20.210Z"
+    },
+    {
+      "textSent": "1",
+      "serverReply": "CON Enter your PIN:\n0. Back",
+      "sessionId": "rec-03-login-success-1774620318699-7",
+      "timestamp": "2026-03-27T14:05:20.712Z"
+    },
+    {
+      "textSent": "43219",
+      "serverReply": "CON Verifying PIN...\n1. Continue\n0. Back",
+      "sessionId": "rec-03-login-success-1774620318699-7",
+      "timestamp": "2026-03-27T14:05:21.227Z"
+    },
+    {
+      "textSent": "1",
+      "serverReply": "CON Welcome, John Doe!\nLogin successful for Customer ID: CE3D5D483.\n1. Continue\n0. Back",
+      "sessionId": "rec-03-login-success-1774620318699-7",
+      "timestamp": "2026-03-27T14:05:21.731Z"
+    },
+    {
+      "textSent": "1",
+      "serverReply": "CON Welcome to USSD Example App\n1. Know More\n2. Account Menu\n*. Exit",
+      "sessionId": "rec-03-login-success-1774620318699-7",
+      "timestamp": "2026-03-27T14:05:22.234Z"
+    },
+    {
+      "textSent": "1",
+      "serverReply": "CON Welcome to USSD Example App Information Center\n1. Interested in Product\n2. Pricing & accessories\n3. Can we deliver to you?\n0. Back",
+      "sessionId": "rec-03-login-success-1774620318699-7",
+      "timestamp": "2026-03-27T14:05:22.736Z"
+    }
+  ]
+}
